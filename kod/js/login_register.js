@@ -2,25 +2,35 @@
 
 let userPrefix = "https://teaching.maumt.se/apis/access/";
 
-document.querySelector("#registerButton").addEventListener("click", registerUser);
+document.querySelector("#registerButton").addEventListener("click", defineRequest);
 
-function registerUser() {
-    let username = document.querySelector("input#username").value;
-    console.log(username);
-    let password = document.querySelector("input#password").value;
-    console.log(password);
+function defineRequest(event) {
+    if(event.currentTarget.id === "registerButton") {
+        prepareRequest("post");
+    } else if(event.currentTarget.id === "loginButton") {
+        prepareRequest("get");
+    }
+}
 
-    let postRequest = new Request(userPrefix, {
-        method: "POST",
-        headers: {"Content-type": "application/json; charset=UTF-8"},
-        body: JSON.stringify({
-            action: "register",
-            user_name: username,
-            password: password
-        })
-    });
-
-    getResource(postRequest);
+function prepareRequest(postOrGet) {
+    if(postOrGet === "post") {
+        let username = document.querySelector("input#username").value;
+        console.log(username);
+        let password = document.querySelector("input#password").value;
+        console.log(password);
+    
+        let postRequest = new Request(userPrefix, {
+            method: "POST",
+            headers: {"Content-type": "application/json; charset=UTF-8"},
+            body: JSON.stringify({
+                action: "register",
+                user_name: username,
+                password: password
+            })
+        });
+    
+        getResource(postRequest);
+    }
 
     if(document.querySelector("#showStatus") === null) {
         console.log("first");
@@ -68,7 +78,6 @@ function statusUpdate(status) {
     function closePopup() {
         document.querySelector("#showStatus").style.visibility = "collapse";
     }
-
 
 }
 
