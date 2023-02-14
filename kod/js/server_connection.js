@@ -1,6 +1,7 @@
 async function getResource(request) {
     let response = await fetch(request);
     console.log(response);
+    statusUpdate(response.status);
     let resource = await response.json();
     console.log(resource);
 }

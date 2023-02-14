@@ -36,3 +36,55 @@ button {
     font-size: 3.4vh;
     font-family: "Roboto Condensed Regular";
 }
+
+#showStatus {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+
+    background-color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    padding: 5vw;
+    box-sizing: border-box;
+    border-radius: 18px;
+}
+
+#contentContainer > p {
+    font-size: 3vh;
+    margin: 0;
+    font-family: "Roboto Condensed Bold";
+}
+
+#contentContainer > button {
+    height: 8vh;
+}
+
+#contentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1.8vh;
+
+    position: relative;
+    top: 35vh;
+    width: 100%;
+    background-color: white;
+    height: 25%;
+    padding: 2.5vh 3.5vh;
+    box-sizing: border-box;
+    border-radius: 18px;
+}
+
+#fetching {
+    position: relative;
+    top: 40vh;
+    width: 100%;
+    background-color: white;
+    padding: 3.5vh;
+    box-sizing: border-box;
+    border-radius: 18px;
+    font-size: 3.2vh;
+}
