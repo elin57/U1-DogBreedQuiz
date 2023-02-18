@@ -47,7 +47,7 @@ function prepareRequest(postOrGet) {
 
         let getRequest = new Request(`${userPrefix}?action=check_credentials&user_name=${username}&password=${password}`);
         //prefix?action=check_credentials&user_name=X&password=Y
-        startFetch(getRequest);
+        startFetch(getRequest);        
     }
 
     if(document.querySelector("#showStatus") === null) {
@@ -60,6 +60,8 @@ function prepareRequest(postOrGet) {
 
     document.querySelector("#showStatus").style.visibility = "visible";
     document.querySelector("#showStatus").innerHTML = `<div id=fetching>Contacting Server...</div>`;
+
+    return;
 }
 
 
@@ -98,9 +100,11 @@ function statusUpdate(status) {
             `;
         }
         document.querySelector("#closePopup").addEventListener("click", closePopup);
+        return;
 
     } else if(document.querySelector("#firstContainer").classList.contains("loginPage")) {
         document.querySelector("#showStatus").style.visibility = "collapse";
+
         if(status === 404) {
             document.querySelector("#mainContent > p").textContent = "Wrong user name or password.";
             document.querySelector("#mainContent > p").style.backgroundColor = "white";
@@ -125,6 +129,7 @@ function statusUpdate(status) {
         document.querySelector("#showStatus").style.visibility = "collapse";
     }
 
+    return;
 }
 
 document.querySelector("#mainContent > div:last-child > span").addEventListener("click", switchPage);
