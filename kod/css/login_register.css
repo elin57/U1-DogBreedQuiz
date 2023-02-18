@@ -1,13 +1,17 @@
-#switchToLogin {
+#switchPage {
     background-color: rgb(7, 130, 73);
     text-align: center;
     text-decoration: underline;
     cursor: pointer;
-    padding-top: 7.5vh;
+    padding-top: 7vh;
 }
 
 input {
-    height: 4.8vh;
+    height: 4.5vh;
+}
+
+label {
+    font-size: 2.7vh;
 }
 
 label:nth-of-type(2) {
@@ -15,25 +19,25 @@ label:nth-of-type(2) {
 }
 
 button {
-    height: 9vh;
+    height: 8vh;
     cursor: pointer;
+    font-size: 3vh;
+    font-family: "Roboto Condensed Regular";
 }
 
 h1 {
     text-align: center;
     font-family: "Roboto Condensed Regular";
     font-size: 6.2vh;
+    margin-bottom: 8vh;
 }
 
 
 p {
     text-align: center;
-    font-size: 2.5vh;
-    font-family: "Roboto Condensed Regular";
-}
-
-button {
-    font-size: 3.4vh;
+    font-size: 2.2vh;
+    padding: 1.2vh;
+    margin: 1.5vh 0 1.1vh 0;
     font-family: "Roboto Condensed Regular";
 }
 
@@ -53,13 +57,13 @@ button {
 }
 
 #contentContainer > p {
-    font-size: 3vh;
+    font-size: 2.5vh;
     margin: 0;
-    font-family: "Roboto Condensed Bold";
+    font-family: "Roboto Condensed Regular";
 }
 
 #contentContainer > button {
-    height: 8vh;
+    height: 7vh;
 }
 
 #contentContainer {
@@ -69,11 +73,10 @@ button {
     gap: 1.8vh;
 
     position: relative;
-    top: 35vh;
+    top: 37vh;
     width: 100%;
     background-color: white;
-    height: 25%;
-    padding: 2.5vh 3.5vh;
+    padding: 2.8vh 3.5vh;
     box-sizing: border-box;
     border-radius: 18px;
 }
@@ -86,5 +89,5 @@ button {
     padding: 3.5vh;
     box-sizing: border-box;
     border-radius: 18px;
-    font-size: 3.2vh;
+    font-size: 3vh;
 }
