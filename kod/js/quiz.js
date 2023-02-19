@@ -8,6 +8,14 @@ function get_random_number (max, min = 0) {
 function prepareQuiz() {
     document.querySelector("#firstContainer").classList.remove("loginPage");
     //Kommer ha endless loop om jag inte tar bort denna classen.
+    document.querySelector("#firstContainer").classList.add("quizPage");
+
+    localStorage.setItem("loggedIn", "true");
+
+    let username = localStorage.getItem("username");
+    console.log(username);
+
+    prepareStatusPopup();
 
     document.querySelector("#firstContainer").style.backgroundColor = "lightblue";
     document.querySelector("header").innerHTML = `
@@ -16,10 +24,18 @@ function prepareQuiz() {
         <div>Dog Breed Quiz</div>
     </div>
     <div id=toLogout>
-        <p id=username></p>
+        <p id=username>${username}</p>
         <button>logout</button>
     </div>
     `;
+
+    document.querySelector("#toLogout > button").addEventListener("click", logOut);
+
+    function logOut() {
+        localStorage.setItem("loggedIn", "false");
+        checkIfLoggedIn();
+    }
+
     document.querySelector("#mainContent").innerHTML = `
         <img id="dogPicture" src="media/logo.png">
         <div id=optionsContainer>
@@ -32,7 +48,6 @@ function prepareQuiz() {
 
     
     if(!document.querySelector("#firstContainer").classList.contains("loginPage")) {
-        document.querySelector("#firstContainer").classList.add("quizPage");
         getPicture();
     }
 
@@ -85,7 +100,7 @@ function placePictureAndOptions(rightIndex, resource) {
         dogNames.sort(comparisonFunction);
 
         function comparisonFunction(element1, element2) {
-            if(element1.length < element2.length) {
+            if(element1 < element2) {
                 return -1;
             } else {
                 return 1;
@@ -95,14 +110,13 @@ function placePictureAndOptions(rightIndex, resource) {
         console.log(dogNames);
     }
 
+    document.querySelector("#showStatus").style.visibility = "collapse";
 
     let nameOptions = document.querySelectorAll("#optionsContainer > div");
     for(let i = 0; i < nameOptions.length; i++) {
         nameOptions[i].textContent = dogNames[i];
         nameOptions[i].addEventListener("click", rightOrWrong);
     }
-        
-    
 
     document.querySelector("#dogPicture").removeAttribute("src");
     document.querySelector("#dogPicture").setAttribute("src", `${resource.message}`);

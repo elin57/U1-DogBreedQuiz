@@ -3,6 +3,8 @@ let userPrefix = "https://teaching.maumt.se/apis/access/";
 
 document.querySelector("#mainContent > button:nth-of-type(1)").addEventListener("click", defineRequest);
 
+document.querySelector("#mainContent > div:last-child > span").addEventListener("click", switchPage);
+
 function defineRequest() {
     if(document.querySelector("#firstContainer").classList.contains("registerPage")) {
         prepareRequest("register");
@@ -17,9 +19,10 @@ function defineRequest() {
     }*/
 }
 
-function prepareRequest(postOrGet) {
-
+async function prepareRequest(postOrGet) {
     
+    prepareStatusPopup();
+
     if(postOrGet === "register") {
         let username = document.querySelector("input#username").value;
         console.log(username);
@@ -47,19 +50,15 @@ function prepareRequest(postOrGet) {
 
         let getRequest = new Request(`${userPrefix}?action=check_credentials&user_name=${username}&password=${password}`);
         //prefix?action=check_credentials&user_name=X&password=Y
-        startFetch(getRequest);        
+
+        startFetch(getRequest);
+
+        /*let loginInfo = await startFetch(getRequest); 
+        let nameOfUser = loginInfo.data.user_name;*/
+        localStorage.removeItem("username");
+        window.localStorage.setItem("username", `${username}`);    
     }
 
-    if(document.querySelector("#showStatus") === null) {
-        console.log("first");
-        let parent = document.querySelector("#firstContainer");
-        let popup = document.createElement("div");
-        popup.setAttribute("id", "showStatus");
-        parent.appendChild(popup);
-    }
-
-    document.querySelector("#showStatus").style.visibility = "visible";
-    document.querySelector("#showStatus").innerHTML = `<div id=fetching>Contacting Server...</div>`;
 
     return;
 }
@@ -120,7 +119,7 @@ function statusUpdate(status) {
             </div>
             `;
             document.querySelector("#closePopup").addEventListener("click", closePopup);
-        } else {
+        } else if(status === 200) {
             prepareQuiz();
         }
     }
@@ -131,8 +130,6 @@ function statusUpdate(status) {
 
     return;
 }
-
-document.querySelector("#mainContent > div:last-child > span").addEventListener("click", switchPage);
 
 function switchPage() {
 

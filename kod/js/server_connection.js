@@ -10,16 +10,5 @@ async function startFetch(request) {
     
 }
 
-/*async function getResource(whatRequest) {
-    let resource = await startFetch(whatRequest);
-    console.log(resource);
-}*/
-
-
-/*async function start_up(request) {
-    const n1 = await getResource(request);
-    console.log(n1);
- }*/
- 
 
 //All kommunikation med servrarna måste lösas med async och await. Metoden .then får inte förekomma i kodbasen.
