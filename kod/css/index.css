@@ -41,15 +41,16 @@ body {
     justify-content: space-between;
 }
 
-header {
+header > #top {
+    font-size: 2.9vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: "Roboto Condensed Regular";
-    font-size: 2.8vh;
 }
 
-img {
+
+#top > img {
     width: 30px;
     height: 30px;
 }
@@ -63,6 +64,3 @@ img {
 footer {
     font-size: 2.2vh;
 }
-
-
-

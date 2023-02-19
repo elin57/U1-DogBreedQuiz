@@ -1,0 +1,73 @@
+.quizPage > #mainContent {
+    /*display: flex;
+    flex-direction: column;*/
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.32fr;
+    gap: 1vh;
+    margin: 0.9vh 0;
+    height: auto;
+    max-height: 75%;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+}
+
+header > #toLogout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0.4vh 0.7vh;
+    border-radius: 1.2vh;
+    box-sizing: border-box;
+}
+
+#toLogout > button {
+    font-size: 2.55vh;
+    height: 3.7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#dogPicture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 15px;
+
+   /* flex-grow: 1;*/
+
+}
+
+#optionsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1vh;
+
+    /*flex-grow: 0;*/
+}
+
+#optionsContainer > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid black;
+    padding: 1.1vh;
+    box-sizing: border-box;
+    overflow: scroll;
+    border-radius: 0.7vh;
+    cursor: pointer;
+    text-align: center;
+
+    font-family: "Roboto Condensed Regular";
+    font-size: 2.55vh;
+}
