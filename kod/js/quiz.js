@@ -55,18 +55,19 @@ function prepareQuiz() {
 }
 
 async function getPicture() {
+
     let randomIndex = get_random_number(ALL_BREEDS.length, 0);
     let rightIndex = ALL_BREEDS[randomIndex];
     console.log(rightIndex);
     let rightOptionURL = rightIndex.url;
-
+    
     let dogPicture = `https://dog.ceo/api/breed/${rightOptionURL}/images/random`;
-
+    
     let resource = await startFetch(dogPicture);
-
-
+    
+    
     placePictureAndOptions(rightIndex, resource);
-
+    
     return;
 }
 
@@ -115,15 +116,57 @@ function placePictureAndOptions(rightIndex, resource) {
     let nameOptions = document.querySelectorAll("#optionsContainer > div");
     for(let i = 0; i < nameOptions.length; i++) {
         nameOptions[i].textContent = dogNames[i];
-        nameOptions[i].addEventListener("click", rightOrWrong);
+        nameOptions[i].addEventListener("click", getBothNames);
     }
 
     document.querySelector("#dogPicture").removeAttribute("src");
     document.querySelector("#dogPicture").setAttribute("src", `${resource.message}`);
 
-    return rightIndex;
+    function getBothNames(event) {
+        let nameClicked = event.currentTarget.textContent;
+        let rightName = rightIndex.name;
+
+        rightOrWrong(rightName, nameClicked);
+    }
+
+    return;
 }
 
-function rightOrWrong(event) {
+function rightOrWrong(rightName, nameClicked) {
+    let popup = document.querySelector("#showStatus");
+    document.querySelector("#showStatus").style.visibility = "visible";
 
+    if(nameClicked === rightName) {
+        popup.innerHTML = `
+        <div id=contentContainer>
+        <p>CORRECT!</p>
+        <button id='getNewPicture'>ONE MORE</button>
+        </div>
+        `;
+
+        document.querySelector("#contentContainer").style.backgroundColor = "limegreen";
+    } else {
+        popup.innerHTML = `
+        <div id=contentContainer>
+        <p>I'm afraid not... :-(</p>
+        <button id='getNewPicture'>ONE MORE</button>
+        </div>
+        `;
+
+        document.querySelector("#contentContainer").style.backgroundColor = "rgb(239, 110, 18)";
+    }
+
+    document.querySelector("#getNewPicture").addEventListener("click", newPicture);
 }
+
+function newPicture() {
+    document.querySelector("#dogPicture").setAttribute("src", "media/logo.png");
+    
+    prepareStatusPopup();
+
+    getPicture();
+}
+
+
+
+
