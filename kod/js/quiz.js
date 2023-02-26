@@ -56,7 +56,6 @@ async function getPicture() {
 
     let randomIndex = getRandomNumber(ALL_BREEDS.length, 0);
     let rightIndex = ALL_BREEDS[randomIndex];
-    console.log(rightIndex);
     let rightOptionURL = rightIndex.url;
     
     let dogPicture = `https://dog.ceo/api/breed/${rightOptionURL}/images/random`;
@@ -73,8 +72,6 @@ function placePictureAndOptions(rightIndex, resource) {
 
     let dogNames = [];
     dogNames.push(rightIndex.name);
-    console.log(dogNames);
-
 
     checkIfSame();
 
@@ -104,11 +101,7 @@ function placePictureAndOptions(rightIndex, resource) {
                 return 1;
             }
         }
-
-        console.log(dogNames);
     }
-
-    document.querySelector("#showStatus").style.visibility = "collapse";
 
     let nameOptions = document.querySelectorAll("#optionsContainer > div");
     for(let i = 0; i < nameOptions.length; i++) {
@@ -118,6 +111,8 @@ function placePictureAndOptions(rightIndex, resource) {
 
     document.querySelector("#dogPicture").removeAttribute("src");
     document.querySelector("#dogPicture").setAttribute("src", `${resource.message}`);
+
+    document.querySelector("#showStatus").style.visibility = "collapse";
 
     function getBothNames(event) {
         let nameClicked = event.currentTarget.textContent;

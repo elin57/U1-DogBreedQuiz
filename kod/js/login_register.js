@@ -11,7 +11,7 @@ function defineRequest() {
     
 }
 
-async function prepareRequest(postOrGet) {
+function prepareRequest(postOrGet) {
 
     let userPrefix = "https://teaching.maumt.se/apis/access/";
     
@@ -19,9 +19,7 @@ async function prepareRequest(postOrGet) {
 
     if(postOrGet === "register") {
         let username = document.querySelector("input#username").value;
-        console.log(username);
         let password = document.querySelector("input#password").value;
-        console.log(password);
     
         let postRequest = new Request(userPrefix, {
             method: "POST",
@@ -37,8 +35,6 @@ async function prepareRequest(postOrGet) {
     } else if(postOrGet === "login") {
         let username = document.querySelector("input#username").value;
         let password = document.querySelector("input#password").value;
-        console.log(username);
-        console.log(password);
 
         let getRequest = new Request(`${userPrefix}?action=check_credentials&user_name=${username}&password=${password}`);
 
@@ -48,11 +44,8 @@ async function prepareRequest(postOrGet) {
         window.localStorage.setItem("username", `${username}`);    
     }
 
-
     return;
 }
-
-
 
 function statusUpdate(status) {
     let popup = document.querySelector("#showStatus");
@@ -106,7 +99,12 @@ function statusUpdate(status) {
             <button id='closePopup'>CLOSE</button>
             </div>
             `;
+
+            document.querySelector("#mainContent > p").textContent = "Let the magic start!";
+            document.querySelector("#mainContent > p").style.backgroundColor = "rgb(94, 225, 181)";
+
             document.querySelector("#closePopup").addEventListener("click", closePopup);
+
         } else if(status === 200) {
             prepareQuiz();
         }
