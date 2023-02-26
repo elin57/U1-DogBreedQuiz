@@ -1,13 +1,10 @@
 .quizPage > #mainContent {
-    /*display: flex;
-    flex-direction: column;*/
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 0.33fr;
+    grid-template-rows: 1fr 0.22fr;
     gap: 1.25vh;
-    margin: 0.9vh 0;
+    margin: 1.5vh 0;
     height: auto;
-    max-height: 79.5%;
 }
 
 header {
@@ -47,9 +44,6 @@ header > #toLogout {
     object-fit: cover;
     object-position: center;
     border-radius: 15px;
-
-   /* flex-grow: 1;*/
-
 }
 
 #optionsContainer {
@@ -57,8 +51,6 @@ header > #toLogout {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 1vh;
-
-    /*flex-grow: 0;*/
 }
 
 #optionsContainer > div {
@@ -76,17 +68,7 @@ header > #toLogout {
 
     font-family: "Roboto Condensed Regular";
     font-size: 2.55vh;
-}
-
-.quizPage > #showStatus > #fetching {
-    position: relative;
-    top: 40vh;
-    width: 100%;
-    background-color: white;
-    padding: 3.5vh;
-    box-sizing: border-box;
-    border-radius: 18px;
-    font-size: 3vh;
+    min-height: 8.5vh;
 }
 
 .quizPage > #showStatus p {

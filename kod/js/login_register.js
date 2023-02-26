@@ -1,9 +1,6 @@
-
-let userPrefix = "https://teaching.maumt.se/apis/access/";
+"use strict";
 
 document.querySelector("#mainContent > button:nth-of-type(1)").addEventListener("click", defineRequest);
-
-document.querySelector("#mainContent > div:last-child > span").addEventListener("click", switchPage);
 
 function defineRequest() {
     if(document.querySelector("#firstContainer").classList.contains("registerPage")) {
@@ -12,14 +9,11 @@ function defineRequest() {
         prepareRequest("login");
     }
     
-    /*if(event.currentTarget.id === "registerButton") {
-        prepareRequest("register");
-    } else if(event.currentTarget.id === "loginButton") {
-        prepareRequest("login");
-    }*/
 }
 
 async function prepareRequest(postOrGet) {
+
+    let userPrefix = "https://teaching.maumt.se/apis/access/";
     
     prepareStatusPopup();
 
@@ -39,8 +33,6 @@ async function prepareRequest(postOrGet) {
             })
         });
         startFetch(postRequest);
-
-    
     
     } else if(postOrGet === "login") {
         let username = document.querySelector("input#username").value;
@@ -49,12 +41,9 @@ async function prepareRequest(postOrGet) {
         console.log(password);
 
         let getRequest = new Request(`${userPrefix}?action=check_credentials&user_name=${username}&password=${password}`);
-        //prefix?action=check_credentials&user_name=X&password=Y
 
         startFetch(getRequest);
 
-        /*let loginInfo = await startFetch(getRequest); 
-        let nameOfUser = loginInfo.data.user_name;*/
         localStorage.removeItem("username");
         window.localStorage.setItem("username", `${username}`);    
     }
@@ -93,13 +82,12 @@ function statusUpdate(status) {
         } else {
             popup.innerHTML = `
             <div id=contentContainer>
-            <p>Registration complete.<br>Please proceed to login.</p>
+            <p>Registration Complete.<br>Please proceed to login.</p>
             <button id='closePopup'>CLOSE</button>
             </div>
             `;
         }
         document.querySelector("#closePopup").addEventListener("click", closePopup);
-        return;
 
     } else if(document.querySelector("#firstContainer").classList.contains("loginPage")) {
         document.querySelector("#showStatus").style.visibility = "collapse";
@@ -131,12 +119,16 @@ function statusUpdate(status) {
     return;
 }
 
-function switchPage() {
+document.querySelector("#mainContent > div:last-child > span").addEventListener("click", switchPage);
+
+function switchPage(event) {
 
     if(document.querySelector("#firstContainer").classList.contains("registerPage")) {
 
         document.querySelector("#firstContainer").classList.remove("registerPage");
         document.querySelector("#firstContainer").classList.add("loginPage");
+
+        document.querySelector("#firstContainer").style.backgroundColor = "rgb(94, 225, 181)";
     
         document.querySelector("h1:nth-of-type(1)").textContent = "LOGIN";
         document.querySelector("p:nth-of-type(1)").textContent = "Let the magic start!";
@@ -144,18 +136,20 @@ function switchPage() {
 
         document.querySelector("#mainContent > button:nth-of-type(1)").textContent = "Login";
         document.querySelector("#mainContent > div:last-child > span").textContent = "New to this? Register for free";
-        
-        document.querySelector("#firstContainer").style.backgroundColor = "rgb(94, 225, 181)";
-        document.querySelector("#switchPage").style.backgroundColor = "rgb(94, 225, 181)";
-        
-        /*document.querySelector("#mainContent > button:nth-of-type(1)").removeAttribute("id");
-        document.querySelector("#mainContent > button:nth-of-type(1)").setAttribute("id", "loginButton");*/
+
+        if(event !== undefined) {
+            document.querySelector("#firstContainer").style.animationName = "registerToLogin";
+            document.querySelector("#firstContainer").style.animationDuration = "1s";
+
+            document.querySelector("#mainContent > p").style.animationName = "registerToLogin";
+            document.querySelector("#mainContent > p").style.animationDuration = "1s";
+        }
 
     } else {
         document.querySelector("#firstContainer").classList.remove("loginPage");
         document.querySelector("#firstContainer").classList.add("registerPage");
+
         document.querySelector("#firstContainer").style.backgroundColor = "rgb(7, 130, 73)";
-        document.querySelector("#switchPage").style.backgroundColor = "rgb(7, 130, 73)";
 
         document.querySelector("h1:nth-of-type(1)").textContent = "REGISTER";
         document.querySelector("p:nth-of-type(1)").textContent = "Ready when you are...";
@@ -164,7 +158,12 @@ function switchPage() {
         document.querySelector("#mainContent > button:nth-of-type(1)").textContent = "Register";
         document.querySelector("#mainContent > div:last-child > span").textContent = "Already have an account? Go to login";
 
-        /*document.querySelector("#mainContent > button:nth-of-type(1)").removeAttribute("id");
-        document.querySelector("#mainContent > button:nth-of-type(1)").setAttribute("id", "registerButton");*/
+        if(event !== undefined) {
+            document.querySelector("#firstContainer").style.animationName = "loginToRegister";
+            document.querySelector("#firstContainer").style.animationDuration = "1s";
+
+            document.querySelector("#mainContent > p").style.animationName = "loginToRegister";
+            document.querySelector("#mainContent > p").style.animationDuration = "1s";
+        }
     }
 }

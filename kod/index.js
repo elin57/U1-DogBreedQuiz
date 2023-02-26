@@ -37,7 +37,6 @@ function checkIfLoggedIn() {
 
 function prepareStatusPopup() {
     if(document.querySelector("#showStatus") === null) {
-        console.log("first");
         let parent = document.querySelector("#firstContainer");
         let popup = document.createElement("div");
         popup.setAttribute("id", "showStatus");

@@ -1,19 +1,17 @@
 "use strict";
 
-function get_random_number (max, min = 0) {
-    // Returns a random number between min (inclusive) and max (exclusive)
+function getRandomNumber(max, min = 0) {
     return min + Math.floor(max * Math.random());
 }
 
 function prepareQuiz() {
     document.querySelector("#firstContainer").classList.remove("loginPage");
-    //Kommer ha endless loop om jag inte tar bort denna classen.
+
     document.querySelector("#firstContainer").classList.add("quizPage");
 
     localStorage.setItem("loggedIn", "true");
 
     let username = localStorage.getItem("username");
-    console.log(username);
 
     prepareStatusPopup();
 
@@ -56,7 +54,7 @@ function prepareQuiz() {
 
 async function getPicture() {
 
-    let randomIndex = get_random_number(ALL_BREEDS.length, 0);
+    let randomIndex = getRandomNumber(ALL_BREEDS.length, 0);
     let rightIndex = ALL_BREEDS[randomIndex];
     console.log(rightIndex);
     let rightOptionURL = rightIndex.url;
@@ -82,7 +80,7 @@ function placePictureAndOptions(rightIndex, resource) {
 
     function checkIfSame() {
         while(dogNames.length < 4) {
-            let randomIndex = get_random_number(ALL_BREEDS.length, 0);
+            let randomIndex = getRandomNumber(ALL_BREEDS.length, 0);
             let dogName = ALL_BREEDS[randomIndex].name;
         
             if(dogNames.some(element => element === dogName)) {
@@ -90,7 +88,6 @@ function placePictureAndOptions(rightIndex, resource) {
             }
             else {
                 dogNames.push(dogName);
-                console.log(dogNames);
             }
         }
         
@@ -126,13 +123,13 @@ function placePictureAndOptions(rightIndex, resource) {
         let nameClicked = event.currentTarget.textContent;
         let rightName = rightIndex.name;
 
-        rightOrWrong(rightName, nameClicked);
+        rightOrWrong(nameClicked, rightName);
     }
 
     return;
 }
 
-function rightOrWrong(rightName, nameClicked) {
+function rightOrWrong(nameClicked, rightName) {
     let popup = document.querySelector("#showStatus");
     document.querySelector("#showStatus").style.visibility = "visible";
 
@@ -156,17 +153,18 @@ function rightOrWrong(rightName, nameClicked) {
         document.querySelector("#contentContainer").style.backgroundColor = "rgb(239, 110, 18)";
     }
 
+    let height = document.querySelector("#firstContainer").scrollHeight;
+    let difference = height - 666;
+    popup.style.bottom = `-${difference}px`;
+
     document.querySelector("#getNewPicture").addEventListener("click", newPicture);
 }
 
 function newPicture() {
+    document.querySelector("#showStatus").style.bottom = "0";
     document.querySelector("#dogPicture").setAttribute("src", "media/logo.png");
-    
+
     prepareStatusPopup();
 
     getPicture();
 }
-
-
-
-
